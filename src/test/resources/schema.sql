@@ -97,3 +97,7 @@ CREATE INDEX IF NOT EXISTS credit_requests_car_id_idx
 
 CREATE INDEX IF NOT EXISTS credit_requests_client_id_idx
     ON credit_requests (client_id, creation_date DESC);
+
+CREATE INDEX IF NOT EXISTS car_model_idx ON cars (model);
+
+CREATE INDEX IF NOT EXISTS car_brand_id_idx ON cars (brand_id);

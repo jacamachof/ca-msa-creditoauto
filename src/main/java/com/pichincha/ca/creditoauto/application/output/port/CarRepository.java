@@ -1,6 +1,7 @@
 package com.pichincha.ca.creditoauto.application.output.port;
 
 import com.pichincha.ca.creditoauto.domain.Car;
+import java.util.List;
 
 /**
  * @author jocamach@pichincha.com
@@ -20,6 +21,22 @@ public interface CarRepository {
    * @see com.pichincha.ca.creditoauto.infrastructure.exception.NotFoundException
    */
   Car findById(Long id);
+
+  /**
+   * Retrieves cars by model
+   *
+   * @param model Model
+   * @return Returns cars with the given model
+   */
+  List<Car> findByModel(String model);
+
+  /**
+   * Retrieves cars by brand ID
+   *
+   * @param id Brand ID
+   * @return Returns cars with the given brand ID
+   */
+  List<Car> findByBrandId(Long id);
 
   /**
    * Returns whether a Car with the given id exists

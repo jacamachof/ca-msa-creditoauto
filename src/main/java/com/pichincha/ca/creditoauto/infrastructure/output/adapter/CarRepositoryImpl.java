@@ -1,14 +1,10 @@
 package com.pichincha.ca.creditoauto.infrastructure.output.adapter;
 
 import com.pichincha.ca.creditoauto.application.output.port.CarRepository;
-import com.pichincha.ca.creditoauto.application.output.port.ClientRepository;
 import com.pichincha.ca.creditoauto.domain.Car;
-import com.pichincha.ca.creditoauto.domain.Client;
 import com.pichincha.ca.creditoauto.infrastructure.exception.NotFoundException;
 import com.pichincha.ca.creditoauto.infrastructure.output.repository.CarJpaRepository;
-import com.pichincha.ca.creditoauto.infrastructure.output.repository.ClientJpaRepository;
 import com.pichincha.ca.creditoauto.infrastructure.output.repository.mapper.CarRepositoryMapper;
-import com.pichincha.ca.creditoauto.infrastructure.output.repository.mapper.ClientRepositoryMapper;
 import java.util.List;
 import java.util.ResourceBundle;
 import lombok.AllArgsConstructor;
@@ -34,6 +30,16 @@ public class CarRepositoryImpl implements CarRepository {
         repository.findByIdWithCreditRequests(id).orElseThrow(() -> {
           throw new NotFoundException(resourceBundle.getString("car.notFound"));
         }));
+  }
+
+  @Override
+  public List<Car> findByModel(String model) {
+    return CarRepositoryMapper.toDomainList(repository.findByModel(model));
+  }
+
+  @Override
+  public List<Car> findByBrandId(Long id) {
+    return CarRepositoryMapper.toDomainList(repository.findByBrandId(id));
   }
 
   @Override
