@@ -17,4 +17,6 @@ public interface SellerJpaRepository extends CrudRepository<SellerEntity, Long> 
   List<SellerEntity> findByCarYard_Id(Long id);
 
   boolean existsByCarYard_Id(Long id);
+
+  boolean existsByIdOrIdentification(Long id, String identification);
 }

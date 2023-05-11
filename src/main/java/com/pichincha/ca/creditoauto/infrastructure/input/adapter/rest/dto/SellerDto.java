@@ -31,6 +31,7 @@ import lombok.ToString;
 @NoArgsConstructor
 public class SellerDto {
 
+  @NotNull
   @Min(1)
   private Long id;
 

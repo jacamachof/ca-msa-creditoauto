@@ -7,6 +7,8 @@ import com.pichincha.ca.creditoauto.infrastructure.output.repository.SellerJpaRe
 import com.pichincha.ca.creditoauto.infrastructure.output.repository.mapper.SellerRepositoryMapper;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -32,6 +34,13 @@ public class SellerRepositoryImpl implements SellerRepository {
   }
 
   @Override
+  public List<Seller> findAll() {
+    return SellerRepositoryMapper.toDomainList(
+        StreamSupport.stream(repository.findAll().spliterator(), false)
+            .collect(Collectors.toList()));
+  }
+
+  @Override
   public List<Seller> findByCarYardId(Long id) {
     var sellers = repository.findByCarYard_Id(id);
 
@@ -48,14 +57,19 @@ public class SellerRepositoryImpl implements SellerRepository {
   }
 
   @Override
+  public boolean existsByIdOrIdentification(Long id, String identification) {
+    return repository.existsByIdOrIdentification(id, identification);
+  }
+
+  @Override
   public boolean existsByCarYardId(Long id) {
     return repository.existsByCarYard_Id(id);
   }
 
   @Override
-  public Seller save(Seller sel) {
+  public Seller save(Seller seller) {
     return SellerRepositoryMapper.toDomain(
-        repository.save(SellerRepositoryMapper.toEntity(sel)));
+        repository.save(SellerRepositoryMapper.toEntity(seller)));
   }
 
   @Override

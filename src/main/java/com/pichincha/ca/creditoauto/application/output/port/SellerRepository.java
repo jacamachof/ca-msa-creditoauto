@@ -23,6 +23,13 @@ public interface SellerRepository {
   Seller findById(Long id);
 
   /**
+   * Retrieves all sellers
+   *
+   * @return Returns a list of sellers
+   */
+  List<Seller> findAll();
+
+  /**
    * Retrieves sellers associated with the given car yard id
    *
    * @param id ID
@@ -41,6 +48,15 @@ public interface SellerRepository {
   boolean existsById(Long id);
 
   /**
+   * Returns whether a Seller with the given name exists
+   *
+   * @param id   ID
+   * @param identification Name
+   * @return True when exists, otherwise false
+   */
+  boolean existsByIdOrIdentification(Long id, String identification);
+
+  /**
    * Returns whether a Seller associated with the given car yard id exists
    *
    * @param id Car yard ID
@@ -51,10 +67,10 @@ public interface SellerRepository {
   /**
    * Saves a given Seller
    *
-   * @param client Client
+   * @param seller Seller
    * @return The saved entity
    */
-  Seller save(Seller client);
+  Seller save(Seller seller);
 
   /**
    * Deletes an existing Seller by its id
