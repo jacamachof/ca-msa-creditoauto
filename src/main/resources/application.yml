@@ -1,0 +1,9 @@
+---
+spring:
+  application:
+    name: CreditoAutoService
+
+server:
+  port: 8080
+  error:
+    include-message: always
