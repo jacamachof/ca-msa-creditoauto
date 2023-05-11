@@ -5,7 +5,10 @@ import com.pichincha.ca.creditoauto.domain.Brand;
 import com.pichincha.ca.creditoauto.infrastructure.exception.NotFoundException;
 import com.pichincha.ca.creditoauto.infrastructure.output.repository.BrandJpaRepository;
 import com.pichincha.ca.creditoauto.infrastructure.output.repository.mapper.BrandRepositoryMapper;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -31,18 +34,25 @@ public class BrandRepositoryImpl implements BrandRepository {
   }
 
   @Override
+  public List<Brand> findAll() {
+    return BrandRepositoryMapper.toDomainList(
+        StreamSupport.stream(repository.findAll().spliterator(), false)
+            .collect(Collectors.toList()));
+  }
+
+  @Override
   public boolean existsById(Long id) {
     return repository.existsById(id);
+  }
+
+  @Override
+  public boolean existsByIdOrName(Long id, String name) {
+    return repository.existsByIdOrName(id, name);
   }
 
   @Override
   public Brand save(Brand brand) {
     return BrandRepositoryMapper.toDomain(
         repository.save(BrandRepositoryMapper.toEntity(brand)));
-  }
-
-  @Override
-  public void deleteById(Long id) {
-    repository.deleteById(id);
   }
 }

@@ -1,16 +1,16 @@
-package com.pichincha.ca.creditoauto.application.output.port;
+package com.pichincha.ca.creditoauto.application.input.port;
 
 import com.pichincha.ca.creditoauto.domain.Brand;
 import java.util.List;
 
 /**
  * @author jocamach@pichincha.com
- * @class_name BrandRepository.java
- * @class_description Defines interface methods to consume brands from external sources regardless
- * of their inner implementation
+ * @class_name BrandService.java
+ * @class_description Defines interface methods for the brand service of the application layer to be
+ * consumed by the input adapters
  * @create_date 10/05/2023 Copyright 2023 Banco Pichincha.
  */
-public interface BrandRepository {
+public interface BrandService {
 
   /**
    * Retrieves a Brand by its id.
@@ -38,19 +38,11 @@ public interface BrandRepository {
   boolean existsById(Long id);
 
   /**
-   * Returns whether a Brand with the given name exists
-   *
-   * @param id   ID
-   * @param name Name
-   * @return True when exists, otherwise false
-   */
-  boolean existsByIdOrName(Long id, String name);
-
-  /**
-   * Saves a given Brand
+   * Creates a given Brand
    *
    * @param brand Brand
    * @return The saved entity
+   * @throws BadRequestException when the brand name or ID already exist
    */
-  Brand save(Brand brand);
+  Brand create(Brand brand);
 }
