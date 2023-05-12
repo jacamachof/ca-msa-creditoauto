@@ -1,0 +1,698 @@
+{
+	"info": {
+		"_postman_id": "188a31cc-6f43-49ad-bdc2-a4b819b6b682",
+		"name": "Credito Auto API Rest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CarYard",
+			"item": [
+				{
+					"name": "/get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/carYards/get?id=1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"carYards",
+								"get"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Patio de Autos Don Pichincha\",\r\n    \"address\": \"Av Amazonas N39-34 y Pereira, Quito, PICHINCHA\",\r\n    \"phoneNumber\": \"123456789\",\r\n    \"pointOfSale\": \"ABC123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/carYards/post",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"carYards",
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/patch",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Patio de Autos Don Pichincha (Actualizado)\",\r\n    \"address\": \"Av Amazonas N39-34 y Pereira, Quito, PICHINCHA\",\r\n    \"phoneNumber\": \"123456789\",\r\n    \"pointOfSale\": \"ABC123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/carYards/patch",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"carYards",
+								"patch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/carYards/delete?id=1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"carYards",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CreditRequest",
+			"item": [
+				{
+					"name": "/get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/creditRequests/get?id=1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"creditRequests",
+								"get"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"car\": {\r\n        \"id\": 1\r\n    },\r\n    \"client\": {\r\n        \"id\": 1\r\n    },\r\n    \"seller\": {\r\n        \"id\": 1\r\n    },\r\n    \"carYard\": {\r\n        \"id\": 1\r\n    },\r\n    \"installments\": 12,\r\n    \"monthTerms\": 12,\r\n    \"observation\": \"Example\",\r\n    \"upfrontPayment\": 9000,\r\n    \"status\": \"REGISTERED\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/creditRequests/post",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"creditRequests",
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/patch",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"car\": {\r\n        \"id\": 1\r\n    },\r\n    \"client\": {\r\n        \"id\": 1\r\n    },\r\n    \"seller\": {\r\n        \"id\": 1\r\n    },\r\n    \"carYard\": {\r\n        \"id\": 1\r\n    },\r\n    \"installments\": 12,\r\n    \"monthTerms\": 12,\r\n    \"observation\": \"Example\",\r\n    \"upfrontPayment\": 9000,\r\n    \"status\": \"DISPATCHED\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/creditRequests/patch",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"creditRequests",
+								"patch"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CarYardClient",
+			"item": [
+				{
+					"name": "/get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/carYardClients/get?id=1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"carYardClients",
+								"get"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"carYard\": {\r\n        \"id\": 1\r\n    },\r\n    \"client\": {\r\n        \"id\": 1\r\n    },\r\n    \"assignedDate\": \"2023-05-12T00:00:00Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/carYardClients/post",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"carYardClients",
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/patch",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"carYard\": {\r\n        \"id\": 1\r\n    },\r\n    \"client\": {\r\n        \"id\": 1\r\n    },\r\n    \"assignedDate\": \"2023-05-12T00:00:00Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/carYardClients/patch",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"carYardClients",
+								"patch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/carYardClients/delete?id=1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"carYardClients",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Brand",
+			"item": [
+				{
+					"name": "/getAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/brands/getAll",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"brands",
+								"getAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Nissan\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/brands/post",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"brands",
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/csv",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Joaquin Camacho/Desktop/brands.csv"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8080/brands/csv",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"brands",
+								"csv"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Seller",
+			"item": [
+				{
+					"name": "/getAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/sellers/getAll",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sellers",
+								"getAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"identification\": \"26078218\",\r\n    \"firstName\": \"Joaquin\",\r\n    \"lastName\": \"Camacho\",\r\n    \"address\": \"Caracas, Venezuela\",\r\n    \"localPhoneNumber\": \"02121234567\",\r\n    \"mobilePhoneNumber\": \"04141234567\",\r\n    \"birthdate\": \"1996-01-02\",\r\n    \"gender\": \"MALE\",\r\n    \"maritalStatus\": \"SINGLE\",\r\n    \"carYardId\": 1,\r\n    \"carYard\": {\r\n        \"id\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/sellers/post",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sellers",
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/csv",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Joaquin Camacho/Desktop/sellers.csv"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8080/sellers/csv",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sellers",
+								"csv"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Client",
+			"item": [
+				{
+					"name": "/getAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/clients/getAll",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clients",
+								"getAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"identification\": \"26078218\",\r\n    \"firstName\": \"Joaquin\",\r\n    \"lastName\": \"Camacho\",\r\n    \"address\": \"Caracas, Venezuela\",\r\n    \"localPhoneNumber\": \"02121234567\",\r\n    \"mobilePhoneNumber\": \"04141234567\",\r\n    \"birthdate\": \"1996-01-02\",\r\n    \"gender\": \"MALE\",\r\n    \"maritalStatus\": \"SINGLE\",\r\n    \"creditApproval\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/clients/post",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clients",
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/csv",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Joaquin Camacho/Desktop/clients.csv"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8080/clients/csv",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clients",
+								"csv"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Car",
+			"item": [
+				{
+					"name": "/get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/cars/get?id=1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cars",
+								"get"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"plate\": \"6TRJ244\",\r\n    \"model\": \"GT-R 2009\",\r\n    \"vin\": \"4Y1SL65848Z411439\",\r\n    \"brand\": {\r\n        \"id\": 1\r\n    },\r\n    \"cylinderCapacity\": 3.6,\r\n    \"value\": 21294\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/cars/post",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cars",
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/patch",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"plate\": \"6TRJ244\",\r\n    \"model\": \"GT-R 2010\",\r\n    \"vin\": \"4Y1SL65848Z411439\",\r\n    \"brand\": {\r\n        \"id\": 1\r\n    },\r\n    \"cylinderCapacity\": 3.8,\r\n    \"value\": 30000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/cars/patch",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cars",
+								"patch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/cars/delete?id=1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cars",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
