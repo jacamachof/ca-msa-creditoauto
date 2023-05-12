@@ -30,6 +30,14 @@ public interface SellerRepository {
   List<Seller> findAll();
 
   /**
+   * Retrieves sellers by identifications
+   *
+   * @param identifications List of identifications
+   * @return List(Seller) Returns sellers found
+   */
+  List<Seller> findByIdentifications(List<String> identifications);
+
+  /**
    * Returns whether a Seller with the given id exists
    *
    * @param id ID
@@ -60,6 +68,13 @@ public interface SellerRepository {
    * @return The saved entity
    */
   Seller save(Seller seller);
+
+  /**
+   * Saves sellers
+   *
+   * @param sellers List of sellers
+   */
+  void saveAll(List<Seller> sellers);
 
   /**
    * Deletes an existing Seller by its id

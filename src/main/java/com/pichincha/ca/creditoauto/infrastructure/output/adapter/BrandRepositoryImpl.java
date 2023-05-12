@@ -41,6 +41,11 @@ public class BrandRepositoryImpl implements BrandRepository {
   }
 
   @Override
+  public List<Brand> findByNames(List<String> names) {
+    return BrandRepositoryMapper.toDomainList(repository.findByNames(names));
+  }
+
+  @Override
   public boolean existsById(Long id) {
     return repository.existsById(id);
   }
@@ -54,5 +59,10 @@ public class BrandRepositoryImpl implements BrandRepository {
   public Brand save(Brand brand) {
     return BrandRepositoryMapper.toDomain(
         repository.save(BrandRepositoryMapper.toEntity(brand)));
+  }
+
+  @Override
+  public void saveAll(List<Brand> brands) {
+    repository.saveAll(BrandRepositoryMapper.toEntityList(brands));
   }
 }

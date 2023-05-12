@@ -4,9 +4,12 @@ import com.pichincha.ca.creditoauto.application.input.port.BrandService;
 import com.pichincha.ca.creditoauto.application.output.port.BrandRepository;
 import com.pichincha.ca.creditoauto.domain.Brand;
 import com.pichincha.ca.creditoauto.infrastructure.exception.BadRequestException;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -53,5 +56,15 @@ public class BrandServiceImpl implements BrandService {
     }
 
     return brandRepository.save(brand);
+  }
+
+  @Override
+  public void saveAll(List<Brand> brands) {
+    var set = new LinkedHashSet<>(brands);
+    var db = new LinkedHashSet<>(brandRepository.findByNames(
+        set.stream().map(Brand::getName).collect(Collectors.toList())));
+
+    set.removeAll(db);
+    brandRepository.saveAll(new ArrayList<>(set));
   }
 }

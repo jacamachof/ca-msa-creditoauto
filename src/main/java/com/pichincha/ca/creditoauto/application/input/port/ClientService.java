@@ -45,4 +45,11 @@ public interface ClientService {
    * @throws BadRequestException when the client identification already exists
    */
   Client create(Client client);
+
+  /**
+   * Create clients
+   *
+   * @param clients List of clients
+   */
+  void saveAll(List<Client> clients);
 }

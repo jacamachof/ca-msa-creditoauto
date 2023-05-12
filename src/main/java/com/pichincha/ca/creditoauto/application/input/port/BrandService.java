@@ -45,4 +45,11 @@ public interface BrandService {
    * @throws BadRequestException when the brand name is missing or already exists
    */
   Brand create(Brand brand);
+
+  /**
+   * Creates brands
+   *
+   * @param brands List of brands
+   */
+  void saveAll(List<Brand> brands);
 }

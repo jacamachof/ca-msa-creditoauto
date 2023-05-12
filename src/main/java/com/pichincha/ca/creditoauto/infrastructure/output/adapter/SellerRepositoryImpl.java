@@ -41,6 +41,11 @@ public class SellerRepositoryImpl implements SellerRepository {
   }
 
   @Override
+  public List<Seller> findByIdentifications(List<String> identifications) {
+    return SellerRepositoryMapper.toDomainList(repository.findByIdentifications(identifications));
+  }
+
+  @Override
   public boolean existsById(Long id) {
     return repository.existsById(id);
   }
@@ -59,6 +64,11 @@ public class SellerRepositoryImpl implements SellerRepository {
   public Seller save(Seller seller) {
     return SellerRepositoryMapper.toDomain(
         repository.save(SellerRepositoryMapper.toEntity(seller)));
+  }
+
+  @Override
+  public void saveAll(List<Seller> sellers) {
+    repository.saveAll(SellerRepositoryMapper.toEntityList(sellers));
   }
 
   @Override

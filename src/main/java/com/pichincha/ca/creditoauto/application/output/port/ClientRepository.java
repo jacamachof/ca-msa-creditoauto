@@ -30,6 +30,14 @@ public interface ClientRepository {
   List<Client> findAll();
 
   /**
+   * Retrieves clients by identifications
+   *
+   * @param identifications List of identifications
+   * @return List(Client) Returns clients found
+   */
+  List<Client> findByIdentifications(List<String> identifications);
+
+  /**
    * Returns whether a Client with the given id exists
    *
    * @param id ID
@@ -52,6 +60,13 @@ public interface ClientRepository {
    * @return The saved entity
    */
   Client save(Client client);
+
+  /**
+   * Saves clients
+   *
+   * @param clients
+   */
+  void saveAll(List<Client> clients);
 
   /**
    * Deletes an existing Client by its id

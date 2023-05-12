@@ -4,8 +4,11 @@ import com.pichincha.ca.creditoauto.application.input.port.SellerService;
 import com.pichincha.ca.creditoauto.application.output.port.SellerRepository;
 import com.pichincha.ca.creditoauto.domain.Seller;
 import com.pichincha.ca.creditoauto.infrastructure.exception.BadRequestException;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -48,5 +51,15 @@ public class SellerServiceImpl implements SellerService {
     }
 
     return sellerRepository.save(seller);
+  }
+
+  @Override
+  public void saveAll(List<Seller> sellers) {
+    var set = new LinkedHashSet<>(sellers);
+    var db = new LinkedHashSet<>(sellerRepository.findByIdentifications(
+        set.stream().map(Seller::getIdentification).collect(Collectors.toList())));
+
+    set.removeAll(db);
+    sellerRepository.saveAll(new ArrayList<>(set));
   }
 }

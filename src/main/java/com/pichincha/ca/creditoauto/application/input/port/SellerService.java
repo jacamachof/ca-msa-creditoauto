@@ -45,4 +45,11 @@ public interface SellerService {
    * @throws BadRequestException when the seller identification already exists
    */
   Seller create(Seller seller);
+
+  /**
+   * Create sellers
+   *
+   * @param sellers List of sellers
+   */
+  void saveAll(List<Seller> sellers);
 }

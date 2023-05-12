@@ -3,8 +3,10 @@ package com.pichincha.ca.creditoauto.infrastructure.input.adapter.rest.impl;
 import com.pichincha.ca.creditoauto.application.input.port.ClientService;
 import com.pichincha.ca.creditoauto.infrastructure.exception.BusinessException;
 import com.pichincha.ca.creditoauto.infrastructure.exception.UnexpectedException;
+import com.pichincha.ca.creditoauto.infrastructure.input.adapter.rest.bean.ValidationService;
 import com.pichincha.ca.creditoauto.infrastructure.input.adapter.rest.dto.ClientDto;
 import com.pichincha.ca.creditoauto.infrastructure.input.adapter.rest.mapper.ClientRestMapper;
+import java.io.IOException;
 import java.util.List;
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author jocamach@pichincha.com
@@ -30,6 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ClientController {
 
   private ClientService clientService;
+  private ValidationService validationService;
 
   /**
    * Fetches all clients
@@ -86,5 +91,37 @@ public class ClientController {
     log.info("ClientController.postClient: {} response: {}", client, response);
 
     return response;
+  }
+
+  @PostMapping("/csv")
+  public void postCsv(@RequestParam MultipartFile file) {
+    log.info("Invoking ClientController.postCsv");
+
+    var dtos = parseCsv(file);
+    validationService.validateClients(dtos);
+
+    try {
+      clientService.saveAll(ClientRestMapper.toDomainList(dtos));
+    } catch (Exception e) {
+      log.error("Exception {} thrown for ClientController.postCsv. {}",
+          e.getClass().getSimpleName(), e.getMessage(), e);
+      throw new UnexpectedException();
+    }
+
+    log.info("ClientController.postCsv success");
+  }
+
+  private List<ClientDto> parseCsv(MultipartFile file) {
+    List<ClientDto> dtos;
+
+    try {
+      dtos = ClientRestMapper.parseCsv(file);
+    } catch (IOException e) {
+      log.warn("IOException for ClientController.postCsv: The CSV file format is not correct. {}",
+          e.getMessage(), e);
+      throw new BusinessException("The CSV file format is not correct");
+    }
+
+    return dtos;
   }
 }

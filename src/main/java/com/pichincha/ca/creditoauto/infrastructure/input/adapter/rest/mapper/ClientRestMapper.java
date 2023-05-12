@@ -1,11 +1,16 @@
 package com.pichincha.ca.creditoauto.infrastructure.input.adapter.rest.mapper;
 
+import com.fasterxml.jackson.databind.MappingIterator;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.pichincha.ca.creditoauto.domain.Client;
 import com.pichincha.ca.creditoauto.domain.enums.GenderEnum;
 import com.pichincha.ca.creditoauto.domain.enums.MaritalStatusEnum;
 import com.pichincha.ca.creditoauto.infrastructure.input.adapter.rest.dto.ClientDto;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author jocamach@pichincha.com
@@ -86,5 +91,18 @@ public class ClientRestMapper {
     }
 
     return domains;
+  }
+
+  public static List<ClientDto> parseCsv(MultipartFile multipartFile) throws IOException {
+    var mapper = new CsvMapper();
+    mapper.findAndRegisterModules();
+    mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+
+    MappingIterator<ClientDto> iterator = mapper
+        .readerFor(ClientDto.class)
+        .with(mapper.schemaFor(ClientDto.class))
+        .readValues(multipartFile.getInputStream());
+
+    return iterator.readAll();
   }
 }

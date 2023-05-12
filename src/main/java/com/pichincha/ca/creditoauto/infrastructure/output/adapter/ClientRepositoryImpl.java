@@ -42,6 +42,11 @@ public class ClientRepositoryImpl implements ClientRepository {
   }
 
   @Override
+  public List<Client> findByIdentifications(List<String> identifications) {
+    return ClientRepositoryMapper.toDomainList(repository.findByIdentifications(identifications));
+  }
+
+  @Override
   public boolean existsById(Long id) {
     return repository.existsById(id);
   }
@@ -55,6 +60,11 @@ public class ClientRepositoryImpl implements ClientRepository {
   public Client save(Client client) {
     return ClientRepositoryMapper.toDomain(
         repository.save(ClientRepositoryMapper.toEntity(client)));
+  }
+
+  @Override
+  public void saveAll(List<Client> clients) {
+    repository.saveAll(ClientRepositoryMapper.toEntityList(clients));
   }
 
   @Override

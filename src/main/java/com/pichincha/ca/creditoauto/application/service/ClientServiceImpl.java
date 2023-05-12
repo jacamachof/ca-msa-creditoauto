@@ -4,8 +4,11 @@ import com.pichincha.ca.creditoauto.application.input.port.ClientService;
 import com.pichincha.ca.creditoauto.application.output.port.ClientRepository;
 import com.pichincha.ca.creditoauto.domain.Client;
 import com.pichincha.ca.creditoauto.infrastructure.exception.BadRequestException;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -48,5 +51,15 @@ public class ClientServiceImpl implements ClientService {
     }
 
     return clientRepository.save(client);
+  }
+
+  @Override
+  public void saveAll(List<Client> clients) {
+    var set = new LinkedHashSet<>(clients);
+    var db = new LinkedHashSet<>(clientRepository.findByIdentifications(
+        set.stream().map(Client::getIdentification).collect(Collectors.toList())));
+
+    set.removeAll(db);
+    clientRepository.saveAll(new ArrayList<>(set));
   }
 }

@@ -5,6 +5,7 @@ import com.pichincha.ca.creditoauto.infrastructure.exception.BusinessException;
 import com.pichincha.ca.creditoauto.infrastructure.exception.UnexpectedException;
 import com.pichincha.ca.creditoauto.infrastructure.input.adapter.rest.dto.BrandDto;
 import com.pichincha.ca.creditoauto.infrastructure.input.adapter.rest.mapper.BrandRestMapper;
+import java.io.IOException;
 import java.util.List;
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author jocamach@pichincha.com
@@ -86,5 +89,24 @@ public class BrandController {
     log.info("BrandController.postBrand: {} response: {}", brand, response);
 
     return response;
+  }
+
+  @PostMapping("/csv")
+  public void postCsv(@RequestParam MultipartFile file) {
+    log.info("Invoking BrandController.postCsv");
+
+    try {
+      brandService.saveAll(BrandRestMapper.parseCsv(file));
+    } catch (IOException e) {
+      log.warn("IOException for BrandController.postCsv: The CSV file format is not correct. {}",
+          e.getMessage(), e);
+      throw new BusinessException("The CSV file format is not correct");
+    } catch (Exception e) {
+      log.error("Exception {} thrown for BrandController.postCsv. {}",
+          e.getClass().getSimpleName(), e.getMessage(), e);
+      throw new UnexpectedException();
+    }
+
+    log.info("BrandController.postCsv success");
   }
 }

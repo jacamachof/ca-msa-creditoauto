@@ -30,6 +30,14 @@ public interface BrandRepository {
   List<Brand> findAll();
 
   /**
+   * Retrieves brands by names
+   *
+   * @param names List of names
+   * @return List(Brand) Returns brands found
+   */
+  List<Brand> findByNames(List<String> names);
+
+  /**
    * Returns whether a Brand with the given id exists
    *
    * @param id ID
@@ -52,4 +60,11 @@ public interface BrandRepository {
    * @return The saved entity
    */
   Brand save(Brand brand);
+
+  /**
+   * Saves brands
+   *
+   * @param brands List of brands
+   */
+  void saveAll(List<Brand> brands);
 }

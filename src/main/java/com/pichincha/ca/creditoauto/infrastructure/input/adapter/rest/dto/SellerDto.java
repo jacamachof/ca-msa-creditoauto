@@ -1,6 +1,7 @@
 package com.pichincha.ca.creditoauto.infrastructure.input.adapter.rest.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.pichincha.ca.creditoauto.infrastructure.input.adapter.rest.bean.GenderValidation;
 import com.pichincha.ca.creditoauto.infrastructure.input.adapter.rest.bean.MaritalStatusValidation;
 import java.time.LocalDate;
@@ -29,6 +30,8 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonPropertyOrder({"id", "identification", "firstName", "lastName", "address", "localPhoneNumber",
+    "mobilePhoneNumber", "birthdate", "gender", "maritalStatus", "carYardId"})
 public class SellerDto {
 
   @Min(1)
@@ -74,5 +77,7 @@ public class SellerDto {
   private String maritalStatus;
 
   @NotNull
+  private Long carYardId;
+
   private CarYardDto carYard;
 }

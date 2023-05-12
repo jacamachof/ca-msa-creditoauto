@@ -1,6 +1,7 @@
 package com.pichincha.ca.creditoauto.infrastructure.output.repository;
 
 import com.pichincha.ca.creditoauto.infrastructure.output.repository.entity.ClientEntity;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -19,4 +20,7 @@ public interface ClientJpaRepository extends CrudRepository<ClientEntity, Long> 
   Optional<ClientEntity> findByIdWithCreditRequests(Long id);
 
   boolean existsByIdentification(String identification);
+
+  @Query("SELECT c FROM ClientEntity c WHERE c.identification IN :identifications")
+  List<ClientEntity> findByIdentifications(List<String> identifications);
 }

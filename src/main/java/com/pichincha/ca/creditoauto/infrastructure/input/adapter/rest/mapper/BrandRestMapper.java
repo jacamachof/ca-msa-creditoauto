@@ -1,9 +1,13 @@
 package com.pichincha.ca.creditoauto.infrastructure.input.adapter.rest.mapper;
 
+import com.fasterxml.jackson.databind.MappingIterator;
+import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.pichincha.ca.creditoauto.domain.Brand;
 import com.pichincha.ca.creditoauto.infrastructure.input.adapter.rest.dto.BrandDto;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author jocamach@pichincha.com
@@ -65,5 +69,13 @@ public class BrandRestMapper {
     }
 
     return domains;
+  }
+
+  public static List<Brand> parseCsv(MultipartFile multipartFile) throws IOException {
+    MappingIterator<BrandDto> iterator = new CsvMapper()
+        .readerWithTypedSchemaFor(BrandDto.class)
+        .readValues(multipartFile.getInputStream());
+
+    return toDomainList(iterator.readAll());
   }
 }
