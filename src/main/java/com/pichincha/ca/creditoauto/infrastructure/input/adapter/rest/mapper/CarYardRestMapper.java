@@ -28,8 +28,6 @@ public class CarYardRestMapper {
         .address(domain.getAddress())
         .phoneNumber(domain.getPhoneNumber())
         .pointOfSale(domain.getPointOfSale())
-        .clients(ClientRestMapper.toDtoList(domain.getClients()))
-        .sellers(SellerRestMapper.toDtoList(domain.getSellers()))
         .build();
   }
 

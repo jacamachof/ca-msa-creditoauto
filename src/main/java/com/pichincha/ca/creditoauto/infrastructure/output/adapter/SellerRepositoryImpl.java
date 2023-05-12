@@ -41,17 +41,6 @@ public class SellerRepositoryImpl implements SellerRepository {
   }
 
   @Override
-  public List<Seller> findByCarYardId(Long id) {
-    var sellers = repository.findByCarYardId(id);
-
-    if (sellers.isEmpty()) {
-      throw new NotFoundException(resourceBundle.getString("sellers.notFoundByCarYard"));
-    }
-
-    return SellerRepositoryMapper.toDomainList(sellers);
-  }
-
-  @Override
   public boolean existsById(Long id) {
     return repository.existsById(id);
   }

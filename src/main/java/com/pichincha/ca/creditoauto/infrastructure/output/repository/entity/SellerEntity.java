@@ -24,6 +24,6 @@ import lombok.ToString;
 public class SellerEntity extends AbstractPerson {
 
   @ManyToOne
-  @JoinColumn(name = "car_yard_id")
+  @JoinColumn(name = "car_yard_id", nullable = false)
   private CarYardEntity carYard;
 }

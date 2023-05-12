@@ -1,8 +1,8 @@
 package com.pichincha.ca.creditoauto.application.service;
 
 import com.pichincha.ca.creditoauto.application.input.port.CarYardService;
+import com.pichincha.ca.creditoauto.application.output.port.CarYardClientRepository;
 import com.pichincha.ca.creditoauto.application.output.port.CarYardRepository;
-import com.pichincha.ca.creditoauto.application.output.port.ClientRepository;
 import com.pichincha.ca.creditoauto.application.output.port.CreditRequestRepository;
 import com.pichincha.ca.creditoauto.application.output.port.SellerRepository;
 import com.pichincha.ca.creditoauto.domain.CarYard;
@@ -26,35 +26,13 @@ public class CarYardServiceImpl implements CarYardService {
 
   private ResourceBundle resourceBundle;
   private CarYardRepository carYardRepository;
-  private ClientRepository clientRepository;
   private SellerRepository sellerRepository;
+  private CarYardClientRepository carYardClientRepository;
   private CreditRequestRepository creditRequestRepository;
 
   @Override
   public CarYard findById(Long id) {
     return carYardRepository.findById(id);
-  }
-
-  @Override
-  public CarYard findCarYardClients(Long id) {
-    var response = carYardRepository.findByIdWithClients(id);
-
-    if (response.getClients().isEmpty()) {
-      throw new NotFoundException(resourceBundle.getString("carYard.notFoundClients"));
-    }
-
-    return response;
-  }
-
-  @Override
-  public CarYard findCarYardSellers(Long id) {
-    var response = carYardRepository.findByIdWithSellers(id);
-
-    if (response.getSellers().isEmpty()) {
-      throw new NotFoundException(resourceBundle.getString("carYard.notFoundSellers"));
-    }
-
-    return response;
   }
 
   @Override
@@ -88,7 +66,7 @@ public class CarYardServiceImpl implements CarYardService {
   @Transactional
   public void deleteById(Long id) {
     if (carYardRepository.existsById(id)) {
-      if (clientRepository.existsByCarYardId(id)) {
+      if (carYardClientRepository.existsByCarYardId(id)) {
         throw new BadRequestException(resourceBundle.getString("carYard.referenceClients"));
       }
 

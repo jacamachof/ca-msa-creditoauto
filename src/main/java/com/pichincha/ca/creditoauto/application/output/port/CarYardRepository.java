@@ -22,26 +22,6 @@ public interface CarYardRepository {
   CarYard findById(Long id);
 
   /**
-   * Retrieves a CarYard, including clients assigned, by its id.
-   *
-   * @param id ID
-   * @return CarYard
-   * @throws NotFoundException when the car yard was not found
-   * @see com.pichincha.ca.creditoauto.infrastructure.exception.NotFoundException
-   */
-  CarYard findByIdWithClients(Long id);
-
-  /**
-   * Retrieves a CarYard, including sellers assigned, by its id.
-   *
-   * @param id ID
-   * @return CarYard
-   * @throws NotFoundException when the car yard was not found
-   * @see com.pichincha.ca.creditoauto.infrastructure.exception.NotFoundException
-   */
-  CarYard findByIdWithSellers(Long id);
-
-  /**
    * Returns whether a CarYard with the given id exists
    *
    * @param id ID

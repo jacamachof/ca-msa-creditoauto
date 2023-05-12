@@ -35,9 +35,7 @@ public class ClientRestMapper {
         .birthdate(domain.getBirthdate())
         .gender(domain.getGender().name())
         .maritalStatus(domain.getMaritalStatus().name())
-        .carYard(CarYardRestMapper.toDto(domain.getCarYard()))
         .creditApproval(domain.getCreditApproval())
-        .assignedDate(domain.getAssignedDate())
         .creditRequests(CreditRequestRestMapper.toDtoList(domain.getCreditRequests()))
         .build();
   }
@@ -58,9 +56,7 @@ public class ClientRestMapper {
     domain.setBirthdate(dto.getBirthdate());
     domain.setGender(GenderEnum.of(dto.getGender()));
     domain.setMaritalStatus(MaritalStatusEnum.of(dto.getMaritalStatus()));
-    domain.setCarYard(CarYardRestMapper.toDomain(dto.getCarYard()));
     domain.setCreditApproval(dto.getCreditApproval());
-    domain.setAssignedDate(dto.getAssignedDate());
     return domain;
   }
 

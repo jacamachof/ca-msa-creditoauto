@@ -34,8 +34,6 @@ public class ClientRepositoryMapper {
 
     PersonRepositoryMapper.toDomain(domain, entity);
     domain.setCreditApproval(entity.getCreditApproval());
-    domain.setAssignedDate(entity.getAssignedDate());
-    domain.setCarYard(CarYardRepositoryMapper.toDomain(entity.getCarYard()));
 
     if (Objects.nonNull(entity.getCreditRequests()) &&
         Persistence.getPersistenceUtil().isLoaded(entity, "creditRequests")) {
@@ -81,8 +79,6 @@ public class ClientRepositoryMapper {
 
     PersonRepositoryMapper.toEntity(entity, domain);
     entity.setCreditApproval(domain.getCreditApproval());
-    entity.setAssignedDate(domain.getAssignedDate());
-    entity.setCarYard(CarYardRepositoryMapper.toEntity(domain.getCarYard()));
 
     return entity;
   }

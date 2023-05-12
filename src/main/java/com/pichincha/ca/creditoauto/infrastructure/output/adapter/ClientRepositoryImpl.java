@@ -7,6 +7,8 @@ import com.pichincha.ca.creditoauto.infrastructure.output.repository.ClientJpaRe
 import com.pichincha.ca.creditoauto.infrastructure.output.repository.mapper.ClientRepositoryMapper;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -33,14 +35,10 @@ public class ClientRepositoryImpl implements ClientRepository {
   }
 
   @Override
-  public List<Client> findByCarYardId(Long id) {
-    var clients = repository.findByCarYardId(id);
-
-    if (clients.isEmpty()) {
-      throw new NotFoundException(resourceBundle.getString("clients.notFoundByCarYard"));
-    }
-
-    return ClientRepositoryMapper.toDomainList(clients);
+  public List<Client> findAll() {
+    return ClientRepositoryMapper.toDomainList(
+        StreamSupport.stream(repository.findAll().spliterator(), false)
+            .collect(Collectors.toList()));
   }
 
   @Override
@@ -49,8 +47,8 @@ public class ClientRepositoryImpl implements ClientRepository {
   }
 
   @Override
-  public boolean existsByCarYardId(Long id) {
-    return repository.existsByCarYardId(id);
+  public boolean existsByIdentification(String identification) {
+    return repository.existsByIdentification(identification);
   }
 
   @Override

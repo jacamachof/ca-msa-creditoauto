@@ -1,7 +1,6 @@
 package com.pichincha.ca.creditoauto.infrastructure.output.repository;
 
 import com.pichincha.ca.creditoauto.infrastructure.output.repository.entity.SellerEntity;
-import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,8 +12,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface SellerJpaRepository extends CrudRepository<SellerEntity, Long> {
-
-  List<SellerEntity> findByCarYardId(Long id);
 
   boolean existsByCarYardId(Long id);
 

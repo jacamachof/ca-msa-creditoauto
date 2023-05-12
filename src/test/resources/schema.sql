@@ -46,11 +46,19 @@ CREATE TABLE IF NOT EXISTS clients
     birthdate           DATE         NOT NULL,
     gender              VARCHAR(50)  NOT NULL,
     marital_status      VARCHAR(50)  NOT NULL,
-    credit_approval     BOOLEAN      NOT NULL DEFAULT FALSE,
-    assigned_date       TIMESTAMP,
-    car_yard_id         INTEGER
-        CONSTRAINT car_yar_id_fk
-            REFERENCES car_yards
+    credit_approval     BOOLEAN      NOT NULL DEFAULT FALSE
+);
+
+CREATE TABLE IF NOT EXISTS car_yard_clients
+(
+    id            SERIAL    NOT NULL
+        CONSTRAINT car_yard_clients_pk PRIMARY KEY,
+    car_yard_id   INTEGER   NOT NULL
+        CONSTRAINT car_yard_id_fk REFERENCES car_yards,
+    client_id     INTEGER   NOT NULL
+        CONSTRAINT client_id_fk REFERENCES clients,
+    assigned_date TIMESTAMP NOT NULL DEFAULT NOW(),
+    CONSTRAINT un_car_yard_clients UNIQUE (car_yard_id, client_id)
 );
 
 CREATE TABLE IF NOT EXISTS sellers
@@ -68,7 +76,7 @@ CREATE TABLE IF NOT EXISTS sellers
     gender              VARCHAR(50)  NOT NULL,
     marital_status      VARCHAR(50)  NOT NULL,
     car_yard_id         INTEGER      NOT NULL
-        CONSTRAINT car_yar_id_fk
+        CONSTRAINT seller_car_yard_id_fk
             REFERENCES car_yards
 );
 

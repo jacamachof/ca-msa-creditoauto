@@ -4,8 +4,6 @@ import com.pichincha.ca.creditoauto.domain.CarYard;
 import com.pichincha.ca.creditoauto.infrastructure.output.repository.entity.CarYardEntity;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import javax.persistence.Persistence;
 
 /**
  * @author jocamach@pichincha.com
@@ -37,16 +35,6 @@ public class CarYardRepositoryMapper {
     domain.setAddress(entity.getAddress());
     domain.setPhoneNumber(entity.getPhoneNumber());
     domain.setPointOfSale(entity.getPointOfSale());
-
-    if (Objects.nonNull(entity.getClients()) &&
-        Persistence.getPersistenceUtil().isLoaded(entity, "clients")) {
-      domain.setClients(ClientRepositoryMapper.toDomainList(entity.getClients()));
-    }
-
-    if (Objects.nonNull(entity.getSellers()) &&
-        Persistence.getPersistenceUtil().isLoaded(entity, "sellers")) {
-      domain.setSellers(SellerRepositoryMapper.toDomainList(entity.getSellers()));
-    }
 
     return domain;
   }

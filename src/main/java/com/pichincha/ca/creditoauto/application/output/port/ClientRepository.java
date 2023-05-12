@@ -23,14 +23,11 @@ public interface ClientRepository {
   Client findById(Long id);
 
   /**
-   * Retrieves clients associated with the given car yard id
+   * Retrieves all clients
    *
-   * @param id ID
-   * @return Clients
-   * @throws NotFoundException when clients were not found
-   * @see com.pichincha.ca.creditoauto.infrastructure.exception.NotFoundException
+   * @return Returns a list of client
    */
-  List<Client> findByCarYardId(Long id);
+  List<Client> findAll();
 
   /**
    * Returns whether a Client with the given id exists
@@ -41,12 +38,12 @@ public interface ClientRepository {
   boolean existsById(Long id);
 
   /**
-   * Returns whether a Client associated with the given car yard id exists
+   * Returns whether a Client with the given name exists
    *
-   * @param id Car yard ID
+   * @param identification Name
    * @return True when exists, otherwise false
    */
-  boolean existsByCarYardId(Long id);
+  boolean existsByIdentification(String identification);
 
   /**
    * Saves a given Client

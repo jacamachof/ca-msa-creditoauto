@@ -30,16 +30,6 @@ public interface SellerRepository {
   List<Seller> findAll();
 
   /**
-   * Retrieves sellers associated with the given car yard id
-   *
-   * @param id ID
-   * @return Sellers
-   * @throws NotFoundException when sellers were not found
-   * @see com.pichincha.ca.creditoauto.infrastructure.exception.NotFoundException
-   */
-  List<Seller> findByCarYardId(Long id);
-
-  /**
    * Returns whether a Seller with the given id exists
    *
    * @param id ID

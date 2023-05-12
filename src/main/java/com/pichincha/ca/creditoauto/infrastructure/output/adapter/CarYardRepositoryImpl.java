@@ -33,20 +33,6 @@ public class CarYardRepositoryImpl implements CarYardRepository {
   }
 
   @Override
-  public CarYard findByIdWithClients(Long id) {
-    return CarYardRepositoryMapper.toDomain(repository.findByIdWithClients(id).orElseThrow(() -> {
-      throw new NotFoundException(resourceBundle.getString(NOT_FOUND_KEY));
-    }));
-  }
-
-  @Override
-  public CarYard findByIdWithSellers(Long id) {
-    return CarYardRepositoryMapper.toDomain(repository.findByIdWithSellers(id).orElseThrow(() -> {
-      throw new NotFoundException(resourceBundle.getString(NOT_FOUND_KEY));
-    }));
-  }
-
-  @Override
   public boolean existsById(Long id) {
     return repository.existsById(id);
   }
