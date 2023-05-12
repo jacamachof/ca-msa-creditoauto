@@ -65,10 +65,7 @@ public class CarYardServiceImpl implements CarYardService {
   @Override
   @Transactional
   public CarYard create(CarYard carYard) {
-    if (Objects.nonNull(carYard.getId()) && carYardRepository.existsById(carYard.getId())) {
-      throw new BadRequestException(resourceBundle.getString("carYard.duplicate"));
-    }
-
+    carYard.setId(null);
     return carYardRepository.save(carYard);
   }
 

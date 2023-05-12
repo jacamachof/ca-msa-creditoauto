@@ -42,7 +42,7 @@ public interface SellerService {
    *
    * @param seller Seller
    * @return The saved entity
-   * @throws BadRequestException when the seller ID or his/her identification already exists
+   * @throws BadRequestException when the seller identification already exists
    */
   Seller create(Seller seller);
 }

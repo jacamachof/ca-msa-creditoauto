@@ -14,9 +14,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SellerJpaRepository extends CrudRepository<SellerEntity, Long> {
 
-  List<SellerEntity> findByCarYard_Id(Long id);
+  List<SellerEntity> findByCarYardId(Long id);
 
-  boolean existsByCarYard_Id(Long id);
+  boolean existsByCarYardId(Long id);
 
-  boolean existsByIdOrIdentification(Long id, String identification);
+  boolean existsByIdentification(String identification);
 }

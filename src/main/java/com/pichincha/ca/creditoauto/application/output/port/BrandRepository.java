@@ -40,11 +40,10 @@ public interface BrandRepository {
   /**
    * Returns whether a Brand with the given name exists
    *
-   * @param id   ID
    * @param name Name
    * @return True when exists, otherwise false
    */
-  boolean existsByIdOrName(Long id, String name);
+  boolean existsByName(String name);
 
   /**
    * Saves a given Brand

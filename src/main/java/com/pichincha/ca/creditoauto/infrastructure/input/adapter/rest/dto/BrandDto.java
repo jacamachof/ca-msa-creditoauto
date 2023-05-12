@@ -1,7 +1,6 @@
 package com.pichincha.ca.creditoauto.infrastructure.input.adapter.rest.dto;
 
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,7 +22,6 @@ import lombok.ToString;
 @NoArgsConstructor
 public class BrandDto {
 
-  @NotNull
   @Min(1)
   private Long id;
   private String name;

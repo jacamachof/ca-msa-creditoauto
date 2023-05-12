@@ -47,6 +47,14 @@ public interface CarRepository {
   boolean existsById(Long id);
 
   /**
+   * Returns whether a Car with the given plate exists
+   *
+   * @param plate Plate
+   * @return True when exists, otherwise false
+   */
+  boolean existsByPlate(String plate);
+
+  /**
    * Saves a given Car
    *
    * @param car Car

@@ -5,7 +5,6 @@ import com.pichincha.ca.creditoauto.application.output.port.SellerRepository;
 import com.pichincha.ca.creditoauto.domain.Seller;
 import com.pichincha.ca.creditoauto.infrastructure.exception.BadRequestException;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 import javax.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -42,9 +41,9 @@ public class SellerServiceImpl implements SellerService {
   @Override
   @Transactional
   public Seller create(Seller seller) {
-    if ((Objects.nonNull(seller.getId()) || Objects.nonNull(seller.getIdentification()))
-        && sellerRepository.existsByIdOrIdentification(seller.getId(),
-        seller.getIdentification())) {
+    seller.setId(null);
+
+    if (sellerRepository.existsByIdentification(seller.getIdentification())) {
       throw new BadRequestException(resourceBundle.getString("seller.duplicate"));
     }
 

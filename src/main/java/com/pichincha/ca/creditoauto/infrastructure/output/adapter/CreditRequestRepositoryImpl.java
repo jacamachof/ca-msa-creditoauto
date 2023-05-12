@@ -38,7 +38,7 @@ public class CreditRequestRepositoryImpl implements CreditRequestRepository {
 
   @Override
   public boolean existsByCarYardId(Long id) {
-    return repository.existsByCarYard_Id(id);
+    return repository.existsByCarYardId(id);
   }
 
   @Override
@@ -50,5 +50,10 @@ public class CreditRequestRepositoryImpl implements CreditRequestRepository {
   @Override
   public void deleteById(Long id) {
     repository.deleteById(id);
+  }
+
+  @Override
+  public void deleteByCarId(Long id) {
+    repository.deleteByCarId(id);
   }
 }

@@ -16,10 +16,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ClientJpaRepository extends CrudRepository<ClientEntity, Long> {
 
-  @Query("SELECT c FROM ClientEntity c JOIN FETCH c.creditRequests cr WHERE c.id = :id")
+  @Query("SELECT c FROM ClientEntity c LEFT JOIN FETCH c.creditRequests cr WHERE c.id = :id")
   Optional<ClientEntity> findByIdWithCreditRequests(Long id);
 
-  List<ClientEntity> findByCarYard_Id(Long id);
+  List<ClientEntity> findByCarYardId(Long id);
 
-  boolean existsByCarYard_Id(Long id);
+  boolean existsByCarYardId(Long id);
 }

@@ -42,8 +42,13 @@ public class BrandServiceImpl implements BrandService {
   @Override
   @Transactional
   public Brand create(Brand brand) {
-    if ((Objects.nonNull(brand.getId()) || Objects.nonNull(brand.getName()))
-        && brandRepository.existsByIdOrName(brand.getId(), brand.getName())) {
+    brand.setId(null);
+
+    if (Objects.isNull(brand.getName())) {
+      throw new BadRequestException(resourceBundle.getString("brand.missingName"));
+    }
+
+    if (brandRepository.existsByName(brand.getName())) {
       throw new BadRequestException(resourceBundle.getString("brand.duplicate"));
     }
 

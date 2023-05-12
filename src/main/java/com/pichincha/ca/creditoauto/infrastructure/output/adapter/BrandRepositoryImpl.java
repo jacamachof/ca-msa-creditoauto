@@ -46,8 +46,8 @@ public class BrandRepositoryImpl implements BrandRepository {
   }
 
   @Override
-  public boolean existsByIdOrName(Long id, String name) {
-    return repository.existsByIdOrName(id, name);
+  public boolean existsByName(String name) {
+    return repository.existsByName(name);
   }
 
   @Override

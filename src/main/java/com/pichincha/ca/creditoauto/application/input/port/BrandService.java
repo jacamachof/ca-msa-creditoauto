@@ -42,7 +42,7 @@ public interface BrandService {
    *
    * @param brand Brand
    * @return The saved entity
-   * @throws BadRequestException when the brand name or ID already exist
+   * @throws BadRequestException when the brand name is missing or already exists
    */
   Brand create(Brand brand);
 }

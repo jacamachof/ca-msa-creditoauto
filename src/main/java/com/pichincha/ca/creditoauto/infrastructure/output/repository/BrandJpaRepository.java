@@ -13,5 +13,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BrandJpaRepository extends CrudRepository<BrandEntity, Long> {
 
-  boolean existsByIdOrName(Long id, String name);
+  boolean existsByName(String name);
 }

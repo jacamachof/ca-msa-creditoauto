@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CarJpaRepository extends CrudRepository<CarEntity, Long> {
 
-  @Query("SELECT c FROM CarEntity c JOIN FETCH c.creditRequests cr WHERE c.id = :id")
+  @Query("SELECT c FROM CarEntity c LEFT JOIN FETCH c.creditRequests cr WHERE c.id = :id")
   Optional<CarEntity> findByIdWithCreditRequests(Long id);
 
   @Query("SELECT c FROM CarEntity c WHERE c.model = :model")
@@ -24,4 +24,6 @@ public interface CarJpaRepository extends CrudRepository<CarEntity, Long> {
 
   @Query("SELECT c FROM CarEntity c WHERE c.brand.id = :id")
   List<CarEntity> findByBrandId(Long id);
+
+  boolean existsByPlate(String plate);
 }

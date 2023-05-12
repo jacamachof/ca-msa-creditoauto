@@ -42,7 +42,7 @@ public class SellerRepositoryImpl implements SellerRepository {
 
   @Override
   public List<Seller> findByCarYardId(Long id) {
-    var sellers = repository.findByCarYard_Id(id);
+    var sellers = repository.findByCarYardId(id);
 
     if (sellers.isEmpty()) {
       throw new NotFoundException(resourceBundle.getString("sellers.notFoundByCarYard"));
@@ -57,13 +57,13 @@ public class SellerRepositoryImpl implements SellerRepository {
   }
 
   @Override
-  public boolean existsByIdOrIdentification(Long id, String identification) {
-    return repository.existsByIdOrIdentification(id, identification);
+  public boolean existsByIdentification(String identification) {
+    return repository.existsByIdentification(identification);
   }
 
   @Override
   public boolean existsByCarYardId(Long id) {
-    return repository.existsByCarYard_Id(id);
+    return repository.existsByCarYardId(id);
   }
 
   @Override

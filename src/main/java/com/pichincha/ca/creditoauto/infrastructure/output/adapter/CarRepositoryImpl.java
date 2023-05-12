@@ -48,6 +48,11 @@ public class CarRepositoryImpl implements CarRepository {
   }
 
   @Override
+  public boolean existsByPlate(String plate) {
+    return repository.existsByPlate(plate);
+  }
+
+  @Override
   public Car save(Car car) {
     return CarRepositoryMapper.toDomain(
         repository.save(CarRepositoryMapper.toEntity(car)));

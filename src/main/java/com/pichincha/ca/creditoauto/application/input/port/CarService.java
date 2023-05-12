@@ -34,8 +34,7 @@ public interface CarService {
    *
    * @param car Car
    * @return The saved entity
-   * @throws BadRequestException when the car ID or plate already exist, or the given car yard ID is
-   *                             not valid
+   * @throws BadRequestException when the car plate already exists or the brand id is not valid
    */
   Car create(Car car);
 
@@ -43,8 +42,9 @@ public interface CarService {
    * Updates a given Car
    *
    * @param car Car
-   * @throws NotFoundException   when the car ID or car yard ID were not found
-   * @throws BadRequestException when the car ID or car yard IS are missing
+   * @throws NotFoundException   when the car id was not found
+   * @throws BadRequestException when the brand id is not valid, or the new plate already exists, or
+   *                             the car has ongoing or dispatched credit requests
    */
   void update(Car car);
 
@@ -52,8 +52,8 @@ public interface CarService {
    * Deletes an existing car by its ID
    *
    * @param id ID
-   * @throws NotFoundException   when the car was not found
-   * @throws BadRequestException when the car has ongoing or concluded credit requests
+   * @throws NotFoundException   when the car id was not found
+   * @throws BadRequestException when the car has ongoing or dispatched credit requests
    */
   void deleteById(Long id);
 }

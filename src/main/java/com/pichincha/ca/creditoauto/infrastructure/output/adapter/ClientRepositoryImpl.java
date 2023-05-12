@@ -34,7 +34,7 @@ public class ClientRepositoryImpl implements ClientRepository {
 
   @Override
   public List<Client> findByCarYardId(Long id) {
-    var clients = repository.findByCarYard_Id(id);
+    var clients = repository.findByCarYardId(id);
 
     if (clients.isEmpty()) {
       throw new NotFoundException(resourceBundle.getString("clients.notFoundByCarYard"));
@@ -50,7 +50,7 @@ public class ClientRepositoryImpl implements ClientRepository {
 
   @Override
   public boolean existsByCarYardId(Long id) {
-    return repository.existsByCarYard_Id(id);
+    return repository.existsByCarYardId(id);
   }
 
   @Override

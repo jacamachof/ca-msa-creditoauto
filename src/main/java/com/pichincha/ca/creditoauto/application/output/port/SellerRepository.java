@@ -50,11 +50,10 @@ public interface SellerRepository {
   /**
    * Returns whether a Seller with the given name exists
    *
-   * @param id   ID
    * @param identification Name
    * @return True when exists, otherwise false
    */
-  boolean existsByIdOrIdentification(Long id, String identification);
+  boolean existsByIdentification(String identification);
 
   /**
    * Returns whether a Seller associated with the given car yard id exists

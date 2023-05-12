@@ -86,7 +86,7 @@ public class CarRepositoryMapper {
     entity.setId(domain.getId());
     entity.setPlate(domain.getPlate());
     entity.setModel(domain.getModel());
-    entity.setVin(domain.getModel());
+    entity.setVin(domain.getVin());
     entity.setType(domain.getType());
     entity.setValue(domain.getValue());
     entity.setCylinderCapacity(domain.getCylinderCapacity());

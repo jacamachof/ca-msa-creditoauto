@@ -35,7 +35,7 @@ public class CarYardController {
   private CarYardService carYardService;
 
   /**
-   * Fetches a card yard by its id
+   * Fetches a car yard by its id
    *
    * @param id ID
    * @return CardYardDto
@@ -156,7 +156,7 @@ public class CarYardController {
       throw new UnexpectedException();
     }
 
-    log.info("CarYardController.getCarYardSellers: {} response: {}", carYard, response);
+    log.info("CarYardController.postCarYard: {} response: {}", carYard, response);
 
     return response;
   }
