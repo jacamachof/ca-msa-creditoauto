@@ -41,7 +41,6 @@ public class CarYardClientServiceImpl implements CarYardClientService {
   @Override
   @Transactional
   public CarYardClient create(CarYardClient carYardClient) {
-    carYardClient.setId(null);
     validateCarYardClient(carYardClient, true);
     return carYardClientRepository.save(carYardClient);
   }

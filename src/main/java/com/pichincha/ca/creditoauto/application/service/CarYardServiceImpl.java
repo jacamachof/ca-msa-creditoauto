@@ -43,7 +43,6 @@ public class CarYardServiceImpl implements CarYardService {
   @Override
   @Transactional
   public CarYard create(CarYard carYard) {
-    carYard.setId(null);
     return carYardRepository.save(carYard);
   }
 

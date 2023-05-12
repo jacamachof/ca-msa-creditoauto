@@ -29,17 +29,17 @@ public class CarRepositoryImpl implements CarRepository {
     return CarRepositoryMapper.toDomain(
         repository.findByIdWithCreditRequests(id).orElseThrow(() -> {
           throw new NotFoundException(resourceBundle.getString("car.notFound"));
-        }));
+        }), true);
   }
 
   @Override
   public List<Car> findByModel(String model) {
-    return CarRepositoryMapper.toDomainList(repository.findByModel(model));
+    return CarRepositoryMapper.toDomainList(repository.findByModel(model), true);
   }
 
   @Override
   public List<Car> findByBrandId(Long id) {
-    return CarRepositoryMapper.toDomainList(repository.findByBrandId(id));
+    return CarRepositoryMapper.toDomainList(repository.findByBrandId(id), true);
   }
 
   @Override
@@ -55,7 +55,7 @@ public class CarRepositoryImpl implements CarRepository {
   @Override
   public Car save(Car car) {
     return CarRepositoryMapper.toDomain(
-        repository.save(CarRepositoryMapper.toEntity(car)));
+        repository.save(CarRepositoryMapper.toEntity(car)), true);
   }
 
   @Override

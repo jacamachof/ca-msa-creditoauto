@@ -33,7 +33,7 @@ public class CarYardClientRepositoryMapper {
 
     domain.setId(entity.getId());
     domain.setCarYard(CarYardRepositoryMapper.toDomain(entity.getCarYard()));
-    domain.setClient(ClientRepositoryMapper.toDomain(entity.getClient()));
+    domain.setClient(ClientRepositoryMapper.toDomain(entity.getClient(), false));
     domain.setAssignedDate(entity.getAssignedDate());
 
     return domain;
@@ -67,6 +67,10 @@ public class CarYardClientRepositoryMapper {
    * @return CarYardClientEntity Returns CarYardClientEntity object
    */
   public static CarYardClientEntity toEntity(CarYardClient domain) {
+    if (domain == null) {
+      return null;
+    }
+
     var entity = new CarYardClientEntity();
 
     entity.setId(domain.getId());

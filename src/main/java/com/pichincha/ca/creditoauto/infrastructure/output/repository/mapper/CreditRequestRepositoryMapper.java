@@ -34,8 +34,8 @@ public class CreditRequestRepositoryMapper {
     var domain = new CreditRequest();
 
     domain.setId(entity.getId());
-    domain.setCar(CarRepositoryMapper.toDomain(entity.getCar()));
-    domain.setClient(ClientRepositoryMapper.toDomain(entity.getClient()));
+    domain.setCar(CarRepositoryMapper.toDomain(entity.getCar(), false));
+    domain.setClient(ClientRepositoryMapper.toDomain(entity.getClient(), false));
     domain.setSeller(SellerRepositoryMapper.toDomain(entity.getSeller()));
     domain.setCarYard(CarYardRepositoryMapper.toDomain(entity.getCarYard()));
     domain.setInstallments(entity.getInstallments());

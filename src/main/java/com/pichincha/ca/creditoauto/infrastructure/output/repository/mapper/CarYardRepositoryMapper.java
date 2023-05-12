@@ -67,6 +67,10 @@ public class CarYardRepositoryMapper {
    * @return CarYardEntity Returns CarYardEntity object
    */
   public static CarYardEntity toEntity(CarYard domain) {
+    if (domain == null) {
+      return null;
+    }
+
     var entity = new CarYardEntity();
 
     entity.setId(domain.getId());

@@ -45,8 +45,6 @@ public class BrandServiceImpl implements BrandService {
   @Override
   @Transactional
   public Brand create(Brand brand) {
-    brand.setId(null);
-
     if (Objects.isNull(brand.getName())) {
       throw new BadRequestException(resourceBundle.getString("brand.missingName"));
     }

@@ -25,7 +25,7 @@ public class ClientRepositoryMapper {
    * @param entity ClientEntity object
    * @return Client Returns Client object
    */
-  public static Client toDomain(ClientEntity entity) {
+  public static Client toDomain(ClientEntity entity, boolean allowRecursive) {
     if (entity == null) {
       return null;
     }
@@ -35,7 +35,7 @@ public class ClientRepositoryMapper {
     PersonRepositoryMapper.toDomain(domain, entity);
     domain.setCreditApproval(entity.getCreditApproval());
 
-    if (Objects.nonNull(entity.getCreditRequests()) &&
+    if (allowRecursive && Objects.nonNull(entity.getCreditRequests()) &&
         Persistence.getPersistenceUtil().isLoaded(entity, "creditRequests")) {
       domain.setCreditRequests(
           CreditRequestRepositoryMapper.toDomainList(entity.getCreditRequests()));
@@ -50,7 +50,7 @@ public class ClientRepositoryMapper {
    * @param entities List of ClientEntity objects
    * @return List(Client) Returns a list of Client objects
    */
-  public static List<Client> toDomainList(List<ClientEntity> entities) {
+  public static List<Client> toDomainList(List<ClientEntity> entities, boolean allowRecursive) {
     if (entities == null) {
       return null;
     }
@@ -58,7 +58,7 @@ public class ClientRepositoryMapper {
     var domains = new ArrayList<Client>();
 
     for (var entity : entities) {
-      domains.add(toDomain(entity));
+      domains.add(toDomain(entity, allowRecursive));
     }
 
     return domains;

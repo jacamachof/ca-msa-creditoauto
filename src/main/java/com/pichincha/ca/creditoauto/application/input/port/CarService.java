@@ -56,4 +56,12 @@ public interface CarService {
    * @throws BadRequestException when the car has ongoing or dispatched credit requests
    */
   void deleteById(Long id);
+
+  /**
+   * Validates whether a car has active credit requests
+   *
+   * @param car Car
+   * @throws BadRequestException when the car has ctive credit requests
+   */
+  void validateCreditRequests(Car car);
 }

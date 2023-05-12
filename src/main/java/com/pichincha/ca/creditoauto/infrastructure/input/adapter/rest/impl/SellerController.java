@@ -12,6 +12,7 @@ import javax.validation.Valid;
 import javax.validation.Validator;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -104,6 +105,10 @@ public class SellerController {
 
     try {
       sellerService.saveAll(SellerRestMapper.toDomainList(dtos));
+    } catch (DataIntegrityViolationException e) {
+      log.warn("DataIntegrityViolationException {} thrown for SellerController.postCsv. {}",
+          e.getClass().getSimpleName(), e.getMessage(), e);
+      throw new BusinessException("One or more rows are invalid");
     } catch (Exception e) {
       log.error("Exception {} thrown for SellerController.postCsv. {}",
           e.getClass().getSimpleName(), e.getMessage(), e);

@@ -8,7 +8,9 @@ import com.pichincha.ca.creditoauto.domain.Car;
 import com.pichincha.ca.creditoauto.domain.enums.CreditRequestEnum;
 import com.pichincha.ca.creditoauto.infrastructure.exception.BadRequestException;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.Set;
 import javax.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,9 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class CarServiceImpl implements CarService {
+
+  private static final Set<CreditRequestEnum> REQUEST_WHITELIST =
+      Set.of(CreditRequestEnum.CANCELED);
 
   private ResourceBundle resourceBundle;
   private CarRepository carRepository;
@@ -41,7 +46,6 @@ public class CarServiceImpl implements CarService {
   @Override
   @Transactional
   public Car create(Car car) {
-    car.setId(null);
     validateCar(car, true);
     return carRepository.save(car);
   }
@@ -89,10 +93,14 @@ public class CarServiceImpl implements CarService {
     }
   }
 
-  private void validateCreditRequests(Car car) {
-    if (!car.getCreditRequests().isEmpty()
-        && car.getCreditRequests().get(0).getStatus() != CreditRequestEnum.CANCELED) {
-      throw new BadRequestException(resourceBundle.getString("car.referenceCreditRequests"));
+  public void validateCreditRequests(Car car) {
+    if (Optional.ofNullable(car.getCreditRequests()).isPresent()) {
+      var request = car.getCreditRequests().stream().findFirst();
+
+      if (request.isPresent() && REQUEST_WHITELIST.stream()
+          .noneMatch(e -> e == request.get().getStatus())) {
+        throw new BadRequestException(resourceBundle.getString("car.referenceCreditRequests"));
+      }
     }
   }
 }

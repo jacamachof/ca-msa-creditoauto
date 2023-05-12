@@ -44,8 +44,6 @@ public class ClientServiceImpl implements ClientService {
   @Override
   @Transactional
   public Client create(Client client) {
-    client.setId(null);
-
     if (clientRepository.existsByIdentification(client.getIdentification())) {
       throw new BadRequestException(resourceBundle.getString("client.duplicate"));
     }

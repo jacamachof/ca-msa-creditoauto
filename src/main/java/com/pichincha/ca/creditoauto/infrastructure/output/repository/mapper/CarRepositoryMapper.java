@@ -25,7 +25,7 @@ public class CarRepositoryMapper {
    * @param entity CarEntity object
    * @return Car Returns Car object
    */
-  public static Car toDomain(CarEntity entity) {
+  public static Car toDomain(CarEntity entity, boolean allowRecursive) {
     if (entity == null) {
       return null;
     }
@@ -41,7 +41,7 @@ public class CarRepositoryMapper {
     domain.setCylinderCapacity(entity.getCylinderCapacity());
     domain.setBrand(BrandRepositoryMapper.toDomain(entity.getBrand()));
 
-    if (Objects.nonNull(entity.getCreditRequests()) &&
+    if (allowRecursive && Objects.nonNull(entity.getCreditRequests()) &&
         Persistence.getPersistenceUtil().isLoaded(entity, "creditRequests")) {
       domain.setCreditRequests(
           CreditRequestRepositoryMapper.toDomainList(entity.getCreditRequests()));
@@ -56,7 +56,7 @@ public class CarRepositoryMapper {
    * @param entities List of CarEntity objects
    * @return List(Car) Returns a list of Car objects
    */
-  public static List<Car> toDomainList(List<CarEntity> entities) {
+  public static List<Car> toDomainList(List<CarEntity> entities, boolean allowRecursive) {
     if (entities == null) {
       return null;
     }
@@ -64,7 +64,7 @@ public class CarRepositoryMapper {
     var domains = new ArrayList<Car>();
 
     for (var entity : entities) {
-      domains.add(toDomain(entity));
+      domains.add(toDomain(entity, allowRecursive));
     }
 
     return domains;

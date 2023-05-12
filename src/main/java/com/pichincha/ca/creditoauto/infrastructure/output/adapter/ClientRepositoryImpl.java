@@ -31,19 +31,20 @@ public class ClientRepositoryImpl implements ClientRepository {
     return ClientRepositoryMapper.toDomain(
         repository.findByIdWithCreditRequests(id).orElseThrow(() -> {
           throw new NotFoundException(resourceBundle.getString("client.notFound"));
-        }));
+        }), true);
   }
 
   @Override
   public List<Client> findAll() {
     return ClientRepositoryMapper.toDomainList(
         StreamSupport.stream(repository.findAll().spliterator(), false)
-            .collect(Collectors.toList()));
+            .collect(Collectors.toList()), true);
   }
 
   @Override
   public List<Client> findByIdentifications(List<String> identifications) {
-    return ClientRepositoryMapper.toDomainList(repository.findByIdentifications(identifications));
+    return ClientRepositoryMapper.toDomainList(repository.findByIdentifications(identifications),
+        true);
   }
 
   @Override
@@ -59,7 +60,7 @@ public class ClientRepositoryImpl implements ClientRepository {
   @Override
   public Client save(Client client) {
     return ClientRepositoryMapper.toDomain(
-        repository.save(ClientRepositoryMapper.toEntity(client)));
+        repository.save(ClientRepositoryMapper.toEntity(client)), true);
   }
 
   @Override

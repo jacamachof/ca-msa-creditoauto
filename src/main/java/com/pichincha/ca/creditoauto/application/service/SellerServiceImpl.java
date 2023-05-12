@@ -44,8 +44,6 @@ public class SellerServiceImpl implements SellerService {
   @Override
   @Transactional
   public Seller create(Seller seller) {
-    seller.setId(null);
-
     if (sellerRepository.existsByIdentification(seller.getIdentification())) {
       throw new BadRequestException(resourceBundle.getString("seller.duplicate"));
     }
