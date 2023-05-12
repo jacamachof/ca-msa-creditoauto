@@ -75,7 +75,7 @@ public class CarServiceImpl implements CarService {
     carRepository.deleteById(id);
   }
 
-  private void validateCar(Car car, boolean validatePlate) {
+  private void validateCar(Car car, boolean validateId) {
     if (Objects.isNull(car.getBrand().getId())) {
       throw new BadRequestException(resourceBundle.getString("brand.missingId"));
     }
@@ -84,7 +84,7 @@ public class CarServiceImpl implements CarService {
       throw new BadRequestException(resourceBundle.getString("brand.notFound"));
     }
 
-    if (validatePlate && carRepository.existsByPlate(car.getPlate())) {
+    if (validateId && carRepository.existsByPlate(car.getPlate())) {
       throw new BadRequestException(resourceBundle.getString("car.duplicate"));
     }
   }

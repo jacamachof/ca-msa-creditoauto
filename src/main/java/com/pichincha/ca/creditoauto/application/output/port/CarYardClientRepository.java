@@ -22,6 +22,15 @@ public interface CarYardClientRepository {
   CarYardClient findById(Long id);
 
   /**
+   * Returns whether a CarYardClient with the given car yard id and client id exists
+   *
+   * @param carYardId Car yard id
+   * @param clientId  Client id
+   * @return True when exists, otherwise false
+   */
+  boolean existsByCarYardIdAndClientId(Long carYardId, Long clientId);
+
+  /**
    * Returns whether a CarYardClient with the given id exists
    *
    * @param id ID

@@ -14,6 +14,4 @@ import org.springframework.stereotype.Repository;
 public interface CreditRequestJpaRepository extends CrudRepository<CreditRequestEntity, Long> {
 
   boolean existsByCarYardId(Long id);
-
-  void deleteByCarId(Long id);
 }

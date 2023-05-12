@@ -40,8 +40,8 @@ public class SellerRestMapper {
         .localPhoneNumber(domain.getLocalPhoneNumber())
         .mobilePhoneNumber(domain.getMobilePhoneNumber())
         .birthdate(domain.getBirthdate())
-        .gender(domain.getGender().name())
-        .maritalStatus(domain.getMaritalStatus().name())
+        .gender(domain.getGender() == null ? null : domain.getGender().name())
+        .maritalStatus(domain.getMaritalStatus() == null ? null : domain.getMaritalStatus().name())
         .carYard(CarYardRestMapper.toDto(domain.getCarYard()))
         .build();
   }

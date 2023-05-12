@@ -59,7 +59,7 @@ public class CreditRequestDto {
   @DecimalMin(value = "000000001.00")
   private Double upfrontPayment;
 
-  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssX")
   private ZonedDateTime creationDate;
 
   @NotNull

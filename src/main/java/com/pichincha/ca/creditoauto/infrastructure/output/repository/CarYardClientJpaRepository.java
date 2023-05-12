@@ -1,4 +1,4 @@
-package com.pichincha.ca.creditoauto.infrastructure.output.repository.mapper;
+package com.pichincha.ca.creditoauto.infrastructure.output.repository;
 
 import com.pichincha.ca.creditoauto.infrastructure.output.repository.entity.CarYardClientEntity;
 import org.springframework.data.repository.CrudRepository;
@@ -14,4 +14,6 @@ import org.springframework.stereotype.Repository;
 public interface CarYardClientJpaRepository extends CrudRepository<CarYardClientEntity, Long> {
 
   boolean existsByCarYardId(Long id);
+
+  boolean existsByCarYardIdAndClientId(Long carYardId, Long clientId);
 }

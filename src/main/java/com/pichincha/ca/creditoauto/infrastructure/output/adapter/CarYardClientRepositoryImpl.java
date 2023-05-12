@@ -3,7 +3,7 @@ package com.pichincha.ca.creditoauto.infrastructure.output.adapter;
 import com.pichincha.ca.creditoauto.application.output.port.CarYardClientRepository;
 import com.pichincha.ca.creditoauto.domain.CarYardClient;
 import com.pichincha.ca.creditoauto.infrastructure.exception.NotFoundException;
-import com.pichincha.ca.creditoauto.infrastructure.output.repository.mapper.CarYardClientJpaRepository;
+import com.pichincha.ca.creditoauto.infrastructure.output.repository.CarYardClientJpaRepository;
 import com.pichincha.ca.creditoauto.infrastructure.output.repository.mapper.CarYardClientRepositoryMapper;
 import java.util.ResourceBundle;
 import lombok.AllArgsConstructor;
@@ -28,6 +28,11 @@ public class CarYardClientRepositoryImpl implements CarYardClientRepository {
     return CarYardClientRepositoryMapper.toDomain(repository.findById(id).orElseThrow(() -> {
       throw new NotFoundException(resourceBundle.getString("carYardClient.notFound"));
     }));
+  }
+
+  @Override
+  public boolean existsByCarYardIdAndClientId(Long carYardId, Long clientId) {
+    return repository.existsByCarYardIdAndClientId(carYardId, clientId);
   }
 
   @Override

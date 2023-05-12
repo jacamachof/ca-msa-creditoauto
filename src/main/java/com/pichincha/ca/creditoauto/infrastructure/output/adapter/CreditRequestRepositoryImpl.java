@@ -51,9 +51,4 @@ public class CreditRequestRepositoryImpl implements CreditRequestRepository {
   public void deleteById(Long id) {
     repository.deleteById(id);
   }
-
-  @Override
-  public void deleteByCarId(Long id) {
-    repository.deleteByCarId(id);
-  }
 }

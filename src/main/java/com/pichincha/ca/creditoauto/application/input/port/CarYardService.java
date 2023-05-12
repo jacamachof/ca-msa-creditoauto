@@ -52,7 +52,8 @@ public interface CarYardService {
    *
    * @param id ID
    * @throws NotFoundException   when the car yard was not found
-   * @throws BadRequestException when the car yard has clients or sellers assigned
+   * @throws BadRequestException when the car yard has references to clients, sellers or credit
+   *                             requests
    */
   void deleteById(Long id);
 }

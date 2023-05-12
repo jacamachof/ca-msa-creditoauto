@@ -38,8 +38,8 @@ public class ClientRestMapper {
         .localPhoneNumber(domain.getLocalPhoneNumber())
         .mobilePhoneNumber(domain.getMobilePhoneNumber())
         .birthdate(domain.getBirthdate())
-        .gender(domain.getGender().name())
-        .maritalStatus(domain.getMaritalStatus().name())
+        .gender(domain.getGender() == null ? null : domain.getGender().name())
+        .maritalStatus(domain.getMaritalStatus() == null ? null : domain.getMaritalStatus().name())
         .creditApproval(domain.getCreditApproval())
         .creditRequests(CreditRequestRestMapper.toDtoList(domain.getCreditRequests()))
         .build();

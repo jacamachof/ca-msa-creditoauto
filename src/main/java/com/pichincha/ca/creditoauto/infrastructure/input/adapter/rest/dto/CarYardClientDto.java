@@ -35,6 +35,6 @@ public class CarYardClientDto {
   private ClientDto client;
 
   @NotNull
-  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssX")
   private ZonedDateTime assignedDate;
 }

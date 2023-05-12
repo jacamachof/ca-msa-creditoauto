@@ -33,7 +33,7 @@ public class CreditRequestRestMapper {
         .observation(domain.getObservation())
         .upfrontPayment(domain.getUpfrontPayment())
         .creationDate(domain.getCreationDate())
-        .status(domain.getStatus().name())
+        .status(domain.getStatus() == null ? null : domain.getStatus().name())
         .build();
   }
 

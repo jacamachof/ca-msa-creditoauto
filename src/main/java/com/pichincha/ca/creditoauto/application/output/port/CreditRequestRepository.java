@@ -51,11 +51,4 @@ public interface CreditRequestRepository {
    * @param id ID
    */
   void deleteById(Long id);
-
-  /**
-   * Deletes existing Credit Requests by its car id
-   *
-   * @param id ID
-   */
-  void deleteByCarId(Long id);
 }
