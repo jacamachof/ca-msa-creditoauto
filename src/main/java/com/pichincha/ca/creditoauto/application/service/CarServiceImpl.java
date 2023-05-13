@@ -75,13 +75,7 @@ public class CarServiceImpl implements CarService {
   public void deleteById(Long id) {
     var car = carRepository.findById(id);
     validateCreditRequests(car);
-
-    if (car.getCreditRequests() != null && !car.getCreditRequests().isEmpty()) {
-      for (var creditRequest : car.getCreditRequests()) {
-        creditRequestRepository.deleteById(creditRequest.getId());
-      }
-    }
-
+    creditRequestRepository.deleteByCarId(id);
     carRepository.deleteById(id);
   }
 
