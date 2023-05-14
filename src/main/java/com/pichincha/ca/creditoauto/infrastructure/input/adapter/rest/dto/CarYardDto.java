@@ -37,7 +37,7 @@ public class CarYardDto {
   private String address;
 
   @NotBlank
-  @Size(min = 1, max = 255)
+  @Size(min = 1, max = 20)
   @Pattern(regexp = "^[0-9]*$")
   private String phoneNumber;
 
