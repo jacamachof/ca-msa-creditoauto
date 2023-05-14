@@ -9,6 +9,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +30,9 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @Validated
 @RestController
-@RequestMapping("/cars")
+@RequestMapping(value = "/cars",
+    consumes = MediaType.APPLICATION_JSON_VALUE,
+    produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 public class CarController {
 
@@ -43,7 +47,7 @@ public class CarController {
    * @throws UnexpectedException when an internal server error was thrown
    */
   @GetMapping("/get")
-  public CarDto getCar(@RequestParam @Min(1) Long id) {
+  public ResponseEntity<CarDto> getCar(@RequestParam @Min(1) Long id) {
     CarDto response;
 
     log.info("Invoking CarController.getCar: {}", id);
@@ -62,7 +66,7 @@ public class CarController {
 
     log.info("CarController.getCar: {} response: {}", id, response);
 
-    return response;
+    return ResponseEntity.ok(response);
   }
 
   /**
@@ -74,7 +78,7 @@ public class CarController {
    * @throws UnexpectedException when an internal server error was thrown
    */
   @PostMapping("/post")
-  public CarDto postCar(@Valid @RequestBody CarDto car) {
+  public ResponseEntity<CarDto> postCar(@Valid @RequestBody CarDto car) {
     CarDto response;
 
     log.info("Invoking CarController.postCar: {}", car);
@@ -93,7 +97,7 @@ public class CarController {
 
     log.info("CarController.postCar: {} response: {}", car, response);
 
-    return response;
+    return ResponseEntity.ok(response);
   }
 
   /**
@@ -106,7 +110,7 @@ public class CarController {
    * @throws UnexpectedException when an internal server error was thrown
    */
   @PatchMapping("/patch")
-  public void patchCar(@Valid @RequestBody CarDto car) {
+  public ResponseEntity<Void> patchCar(@Valid @RequestBody CarDto car) {
     log.info("Invoking CarController.patchCar: {}", car);
 
     try {
@@ -122,6 +126,8 @@ public class CarController {
     }
 
     log.info("CarController.patchCar: {} updated successfully", car);
+
+    return ResponseEntity.ok().build();
   }
 
   /**
@@ -133,7 +139,7 @@ public class CarController {
    * @throws UnexpectedException when an internal server error was thrown
    */
   @DeleteMapping("/delete")
-  public void deleteCar(@RequestParam @Min(1) Long id) {
+  public ResponseEntity<Void> deleteCar(@RequestParam @Min(1) Long id) {
     log.info("Invoking CarController.deleteCar: {}", id);
 
     try {
@@ -149,5 +155,7 @@ public class CarController {
     }
 
     log.info("CarController.deleteCar: {} deleted successfully", id);
+
+    return ResponseEntity.ok().build();
   }
 }

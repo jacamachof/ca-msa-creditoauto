@@ -9,6 +9,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -27,7 +29,9 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @Validated
 @RestController
-@RequestMapping("/creditRequests")
+@RequestMapping(value = "/creditRequests",
+    consumes = MediaType.APPLICATION_JSON_VALUE,
+    produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 public class CreditRequestController {
 
@@ -42,7 +46,7 @@ public class CreditRequestController {
    * @throws UnexpectedException when an internal server error was thrown
    */
   @GetMapping("/get")
-  public CreditRequestDto getCreditRequest(@RequestParam @Min(1) Long id) {
+  public ResponseEntity<CreditRequestDto> getCreditRequest(@RequestParam @Min(1) Long id) {
     CreditRequestDto response;
 
     log.info("Invoking CreditRequestController.getCreditRequest: {}", id);
@@ -61,7 +65,7 @@ public class CreditRequestController {
 
     log.info("CreditRequestController.getCreditRequest: {} response: {}", id, response);
 
-    return response;
+    return ResponseEntity.ok(response);
   }
 
   /**
@@ -75,7 +79,8 @@ public class CreditRequestController {
    * @throws UnexpectedException when an internal server error was thrown
    */
   @PostMapping("/post")
-  public CreditRequestDto postCreditRequest(@Valid @RequestBody CreditRequestDto creditRequest) {
+  public ResponseEntity<CreditRequestDto> postCreditRequest(
+      @Valid @RequestBody CreditRequestDto creditRequest) {
     CreditRequestDto response;
 
     log.info("Invoking CreditRequestController.postCreditRequest: {}", creditRequest);
@@ -95,7 +100,7 @@ public class CreditRequestController {
 
     log.info("CreditRequestController.postCreditRequest: {} response: {}", creditRequest, response);
 
-    return response;
+    return ResponseEntity.ok(response);
   }
 
   /**
@@ -106,7 +111,8 @@ public class CreditRequestController {
    * @throws UnexpectedException when an internal server error was thrown
    */
   @PatchMapping("/patch")
-  public void patchCreditRequest(@Valid @RequestBody CreditRequestDto creditRequest) {
+  public ResponseEntity<Void> patchCreditRequest(
+      @Valid @RequestBody CreditRequestDto creditRequest) {
     log.info("Invoking CreditRequestController.patchCreditRequest: {}", creditRequest);
 
     try {
@@ -122,5 +128,7 @@ public class CreditRequestController {
     }
 
     log.info("CreditRequestController.patchCreditRequest: {} updated successfully", creditRequest);
+
+    return ResponseEntity.ok().build();
   }
 }

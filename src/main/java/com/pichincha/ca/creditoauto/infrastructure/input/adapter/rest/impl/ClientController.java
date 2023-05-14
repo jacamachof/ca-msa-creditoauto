@@ -12,6 +12,8 @@ import javax.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,7 +32,9 @@ import org.springframework.web.multipart.MultipartFile;
 @Slf4j
 @Validated
 @RestController
-@RequestMapping("/clients")
+@RequestMapping(value = "/clients",
+    consumes = MediaType.APPLICATION_JSON_VALUE,
+    produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 public class ClientController {
 
@@ -44,7 +48,7 @@ public class ClientController {
    * @throws UnexpectedException when an internal server error was thrown
    */
   @GetMapping("/getAll")
-  public List<ClientDto> getClients() {
+  public ResponseEntity<List<ClientDto>> getClients() {
     List<ClientDto> response;
 
     log.info("Invoking ClientController.getClients");
@@ -59,7 +63,7 @@ public class ClientController {
 
     log.info("ClientController.getClients response: {}", response);
 
-    return response;
+    return ResponseEntity.ok(response);
   }
 
   /**
@@ -71,7 +75,7 @@ public class ClientController {
    * @throws UnexpectedException when an internal server error was thrown
    */
   @PostMapping("/post")
-  public ClientDto postClient(@Valid @RequestBody ClientDto client) {
+  public ResponseEntity<ClientDto> postClient(@Valid @RequestBody ClientDto client) {
     ClientDto response;
 
     log.info("Invoking ClientController.postClient: {}", client);
@@ -91,11 +95,11 @@ public class ClientController {
 
     log.info("ClientController.postClient: {} response: {}", client, response);
 
-    return response;
+    return ResponseEntity.ok(response);
   }
 
   @PostMapping("/csv")
-  public void postCsv(@RequestParam MultipartFile file) {
+  public ResponseEntity<Void> postCsv(@RequestParam MultipartFile file) {
     log.info("Invoking ClientController.postCsv");
 
     var dtos = parseCsv(file);
@@ -115,6 +119,8 @@ public class ClientController {
     }
 
     log.info("ClientController.postCsv success");
+
+    return ResponseEntity.ok().build();
   }
 
   private List<ClientDto> parseCsv(MultipartFile file) {

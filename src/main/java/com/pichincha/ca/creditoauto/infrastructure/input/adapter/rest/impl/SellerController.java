@@ -9,10 +9,11 @@ import com.pichincha.ca.creditoauto.infrastructure.input.adapter.rest.mapper.Sel
 import java.io.IOException;
 import java.util.List;
 import javax.validation.Valid;
-import javax.validation.Validator;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,11 +32,12 @@ import org.springframework.web.multipart.MultipartFile;
 @Slf4j
 @Validated
 @RestController
-@RequestMapping("/sellers")
+@RequestMapping(value = "/sellers",
+    consumes = MediaType.APPLICATION_JSON_VALUE,
+    produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 public class SellerController {
 
-  private Validator validator;
   private SellerService sellerService;
   private ValidationService validationService;
 
@@ -46,7 +48,7 @@ public class SellerController {
    * @throws UnexpectedException when an internal server error was thrown
    */
   @GetMapping("/getAll")
-  public List<SellerDto> getSellers() {
+  public ResponseEntity<List<SellerDto>> getSellers() {
     List<SellerDto> response;
 
     log.info("Invoking SellerController.getSellers");
@@ -61,7 +63,7 @@ public class SellerController {
 
     log.info("SellerController.getSellers response: {}", response);
 
-    return response;
+    return ResponseEntity.ok(response);
   }
 
   /**
@@ -73,7 +75,7 @@ public class SellerController {
    * @throws UnexpectedException when an internal server error was thrown
    */
   @PostMapping("/post")
-  public SellerDto postSeller(@Valid @RequestBody SellerDto seller) {
+  public ResponseEntity<SellerDto> postSeller(@Valid @RequestBody SellerDto seller) {
     SellerDto response;
 
     log.info("Invoking SellerController.postSeller: {}", seller);
@@ -93,11 +95,11 @@ public class SellerController {
 
     log.info("SellerController.postSeller: {} response: {}", seller, response);
 
-    return response;
+    return ResponseEntity.ok(response);
   }
 
   @PostMapping("/csv")
-  public void postCsv(@RequestParam MultipartFile file) {
+  public ResponseEntity<Void> postCsv(@RequestParam MultipartFile file) {
     log.info("Invoking SellerController.postCsv");
 
     var dtos = parseCsv(file);
@@ -116,6 +118,8 @@ public class SellerController {
     }
 
     log.info("SellerController.postCsv success");
+
+    return ResponseEntity.ok().build();
   }
 
   private List<SellerDto> parseCsv(MultipartFile file) {

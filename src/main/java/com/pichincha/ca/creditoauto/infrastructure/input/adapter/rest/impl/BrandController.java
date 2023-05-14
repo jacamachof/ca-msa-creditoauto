@@ -11,6 +11,8 @@ import javax.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,7 +31,9 @@ import org.springframework.web.multipart.MultipartFile;
 @Slf4j
 @Validated
 @RestController
-@RequestMapping("/brands")
+@RequestMapping(value = "/brands",
+    consumes = MediaType.APPLICATION_JSON_VALUE,
+    produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 public class BrandController {
 
@@ -42,7 +46,7 @@ public class BrandController {
    * @throws UnexpectedException when an internal server error was thrown
    */
   @GetMapping("/getAll")
-  public List<BrandDto> getBrands() {
+  public ResponseEntity<List<BrandDto>> getBrands() {
     List<BrandDto> response;
 
     log.info("Invoking BrandController.getBrands");
@@ -57,7 +61,7 @@ public class BrandController {
 
     log.info("BrandController.getCarYard response: {}", response);
 
-    return response;
+    return ResponseEntity.ok(response);
   }
 
   /**
@@ -69,7 +73,7 @@ public class BrandController {
    * @throws UnexpectedException when an internal server error was thrown
    */
   @PostMapping("/post")
-  public BrandDto postBrand(@Valid @RequestBody BrandDto brand) {
+  public ResponseEntity<BrandDto> postBrand(@Valid @RequestBody BrandDto brand) {
     BrandDto response;
 
     log.info("Invoking BrandController.postBrand: {}", brand);
@@ -89,11 +93,11 @@ public class BrandController {
 
     log.info("BrandController.postBrand: {} response: {}", brand, response);
 
-    return response;
+    return ResponseEntity.ok(response);
   }
 
   @PostMapping("/csv")
-  public void postCsv(@RequestParam MultipartFile file) {
+  public ResponseEntity<Void> postCsv(@RequestParam MultipartFile file) {
     log.info("Invoking BrandController.postCsv");
 
     try {
@@ -113,5 +117,7 @@ public class BrandController {
     }
 
     log.info("BrandController.postCsv success");
+
+    return ResponseEntity.ok().build();
   }
 }

@@ -9,6 +9,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +30,9 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @Validated
 @RestController
-@RequestMapping("/carYards")
+@RequestMapping(value = "/carYards",
+    consumes = MediaType.APPLICATION_JSON_VALUE,
+    produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 public class CarYardController {
 
@@ -43,7 +47,7 @@ public class CarYardController {
    * @throws UnexpectedException when an internal server error was thrown
    */
   @GetMapping("/get")
-  public CarYardDto getCarYard(@RequestParam @Min(1) Long id) {
+  public ResponseEntity<CarYardDto> getCarYard(@RequestParam @Min(1) Long id) {
     CarYardDto response;
 
     log.info("Invoking CarYardController.getCarYard: {}", id);
@@ -62,7 +66,7 @@ public class CarYardController {
 
     log.info("CarYardController.getCarYard: {} response: {}", id, response);
 
-    return response;
+    return ResponseEntity.ok(response);
   }
 
   /**
@@ -74,7 +78,7 @@ public class CarYardController {
    * @throws UnexpectedException when an internal server error was thrown
    */
   @PostMapping("/post")
-  public CarYardDto postCarYard(@Valid @RequestBody CarYardDto carYard) {
+  public ResponseEntity<CarYardDto> postCarYard(@Valid @RequestBody CarYardDto carYard) {
     CarYardDto response;
 
     log.info("Invoking CarYardController.postCarYard: {}", carYard);
@@ -94,7 +98,7 @@ public class CarYardController {
 
     log.info("CarYardController.postCarYard: {} response: {}", carYard, response);
 
-    return response;
+    return ResponseEntity.ok(response);
   }
 
   /**
@@ -105,7 +109,7 @@ public class CarYardController {
    * @throws UnexpectedException when an internal server error was thrown
    */
   @PatchMapping("/patch")
-  public void patchCarYard(@Valid @RequestBody CarYardDto carYard) {
+  public ResponseEntity<Void> patchCarYard(@Valid @RequestBody CarYardDto carYard) {
     log.info("Invoking CarYardController.patchCarYard: {}", carYard);
 
     try {
@@ -121,6 +125,8 @@ public class CarYardController {
     }
 
     log.info("CarYardController.patchCarYard: {} updated successfully", carYard);
+
+    return ResponseEntity.ok().build();
   }
 
   /**
@@ -132,7 +138,7 @@ public class CarYardController {
    * @throws UnexpectedException when an internal server error was thrown
    */
   @DeleteMapping("/delete")
-  public void deleteCarYard(@RequestParam @Min(1) Long id) {
+  public ResponseEntity<Void> deleteCarYard(@RequestParam @Min(1) Long id) {
     log.info("Invoking CarYardController.deleteCarYard: {}", id);
 
     try {
@@ -148,6 +154,8 @@ public class CarYardController {
     }
 
     log.info("CarYardController.deleteCarYard: {} deleted successfully", id);
-  }
 
+    return ResponseEntity.ok().build();
+
+  }
 }
